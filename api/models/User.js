@@ -1,6 +1,62 @@
 const mongoose = require("mongoose");
 const config = require("../config");
 
+const addressSchema = mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+	},
+	address: {
+		type: String,
+		required: true,
+	},
+	pinCode: {
+		type: Number,
+		required: true,
+	},
+});
+
+const wishlistItemSchema = mongoose.Schema({
+	id: {
+		type: String,
+		required: true,
+	},
+	dateAdded: {
+		type: Date,
+		default: Date.now(),
+	},
+});
+
+const cartItemSchema = mongoose.Schema({
+	id: {
+		type: String,
+		required: true,
+	},
+	quantity: {
+		type: Number,
+		default: 1,
+	},
+});
+
+const orderItemSchema = mongoose.Schema({
+	id: {
+		type: String,
+		required: true,
+	},
+	quantity: {
+		type: Number,
+		default: 1,
+	},
+	address: {
+		type: addressSchema,
+		required: true,
+	},
+	delivered: {
+		type: Boolean,
+		default: false,
+	},
+});
+
 const userSchema = mongoose.Schema(
 	{
 		username: {
@@ -25,6 +81,22 @@ const userSchema = mongoose.Schema(
 		verified: {
 			type: Boolean,
 			default: false,
+		},
+
+		dafaultAddress: {
+			type: addressSchema,
+		},
+		wishlist: {
+			type: [wishlistItemSchema],
+			default: [],
+		},
+		cart: {
+			type: [cartItemSchema],
+			default: [],
+		},
+		orders: {
+			type: [orderItemSchema],
+			default: [],
 		},
 	},
 	{ timestamps: true }
