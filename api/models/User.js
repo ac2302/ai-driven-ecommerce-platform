@@ -18,7 +18,7 @@ const addressSchema = mongoose.Schema({
 
 const wishlistItemSchema = mongoose.Schema({
 	id: {
-		type: String,
+		type: Number,
 		required: true,
 	},
 	dateAdded: {
@@ -29,7 +29,7 @@ const wishlistItemSchema = mongoose.Schema({
 
 const cartItemSchema = mongoose.Schema({
 	id: {
-		type: String,
+		type: Number,
 		required: true,
 	},
 	quantity: {
@@ -40,7 +40,7 @@ const cartItemSchema = mongoose.Schema({
 
 const orderItemSchema = mongoose.Schema({
 	id: {
-		type: String,
+		type: Number,
 		required: true,
 	},
 	quantity: {
