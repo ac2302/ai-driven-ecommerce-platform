@@ -8,6 +8,10 @@ module.exports = {
 		string: process.env.DB_STRING,
 		cleanInterval: 1000 * 60 * 5, // 5 min
 	},
+	cms: {
+		location: "http://localhost:1337",
+		token: process.env.CMS_TOKEN,
+	},
 	mail: {
 		credentials: {
 			email: process.env.EMAIL,

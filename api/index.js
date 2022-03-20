@@ -5,7 +5,6 @@ const cors = require("cors");
 const authMiddleware = require("./middlewares/auth");
 const tokenMiddleware = require("./middlewares/token");
 const cleanDB = require("./utils/cleanDB");
-
 const app = express();
 
 // middlewares
@@ -34,4 +33,3 @@ app.listen(config.server.port, "0.0.0.0", () => {
 
 // clean DB
 setTimeout(cleanDB, config.db.cleanInterval);
-
