@@ -1,0 +1,16 @@
+.nav .logo {
+	font-size: 30px;
+	text-decoration: none;
+	padding: 0;
+	margin: 0;
+	padding-left: 30px;
+	color: aliceblue;
+	font-weight: bold;
+}
+
+.nav .right {
+	display: inline-block;
+    padding-top: 5px;
+    padding-right: 30px;
+	float: right;
+}
