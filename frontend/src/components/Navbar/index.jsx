@@ -1,11 +1,7 @@
+import { Actions } from "./Actions";
 import { Links } from "./Links";
 import React from "react";
-import {
-	Header,
-	Button,
-	Container,
-	Group,
-} from "@mantine/core";
+import { Header, Button, Container, Group } from "@mantine/core";
 
 import "./styles.css";
 
@@ -20,7 +16,7 @@ export function MyNavbar({ links }) {
 				<Container>
 					<Group spacing="xl">
 						<Links links={links} />
-						<Button color="red">Sign Up</Button>
+						<Actions />
 					</Group>
 				</Container>
 			</span>

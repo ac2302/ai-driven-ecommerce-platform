@@ -1,0 +1,12 @@
+.registerPage .container {
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+.registerPage .step {
+	padding-top: 30px;
+}
+
+.registerPage .hidden {
+	display: none;
+}
