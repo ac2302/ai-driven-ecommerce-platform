@@ -1,8 +1,9 @@
 import { CreateAccount } from "./CreateAccount";
-import { Center, Container, Stepper, Text } from "@mantine/core";
+import { Button, Center, Container, Space, Stepper, Text } from "@mantine/core";
 import React, { useState } from "react";
 
 import "./styles.css";
+import { VerifyEmail } from "./VerifyEmail";
 
 function Register() {
 	const [active, setActive] = useState(0);
@@ -24,7 +25,7 @@ function Register() {
 						label="Second step"
 						description="Verify email"
 					>
-						Step 2 content: Verify email
+						<VerifyEmail user={user} setActive={setActive} />
 					</Stepper.Step>
 					<Stepper.Completed>
 						<div className="step">
@@ -33,6 +34,14 @@ function Register() {
 									Completed, You can now sign into your account
 								</Text>
 							</Center>
+							<Space h="md" />
+							<Button
+								fullWidth
+								style={{ marginLeft: "30px", marginRight: "30px" }}
+								onClick={()=>window.location="/login"}
+							>
+								Sign In
+							</Button>
 						</div>
 					</Stepper.Completed>
 				</Stepper>
