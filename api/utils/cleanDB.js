@@ -8,13 +8,13 @@ async function cleanDB() {
 
 	otps.forEach((otp) => {
 		if (Date.parse(otp.validTill) < now) {
-			otp.delete();
+			{otp.delete();}
 		}
 	});
 
 	tokens.forEach((token) => {
 		if (Date.parse(token.validTill) < now) {
-			otp.delete();
+			token.delete();
 		}
 	});
 }
