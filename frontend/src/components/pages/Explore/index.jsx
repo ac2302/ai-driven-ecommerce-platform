@@ -156,7 +156,14 @@ function Explore() {
 										Only {product.attributes.stock} left in stock
 									</Badge>
 
-									<Button className="btn" radius="xl" size="md">
+									<Button
+										className="btn"
+										radius="xl"
+										size="md"
+										onClick={() => {
+											window.location = `/product/${product.id}`;
+										}}
+									>
 										View
 									</Button>
 								</div>

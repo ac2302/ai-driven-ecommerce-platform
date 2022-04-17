@@ -4,6 +4,7 @@ import "./App.css";
 import { MyNavbar } from "./components/Navbar";
 import Explore from "./components/pages/Explore";
 import Login from "./components/pages/Login";
+import ProductPage from "./components/pages/Product";
 import Register from "./components/pages/Register";
 import VerifyPage from "./components/pages/Verify";
 import config from "./config";
@@ -22,6 +23,7 @@ function App() {
 							<Route path="/verify" element={<VerifyPage />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/explore" element={<Explore />} />
+							<Route path="/product/*" element={<ProductPage />} />
 							<Route path="*" element={<h1>404</h1>} />
 						</Routes>
 					</ScrollArea>

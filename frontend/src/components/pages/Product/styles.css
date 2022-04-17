@@ -1,0 +1,28 @@
+.product-page {
+	display: flex;
+}
+
+.product-page .image-bar {
+	width: 500px;
+	padding-right: 20px;
+}
+
+.product-page .details-container {
+	width: 100%;
+}
+
+.product-page .stock-container {
+	display: inline-block;
+	margin-left: 50px;
+	margin-right: 0;
+}
+
+.product-page .order-container {
+	display: flex;
+}
+.product-page .order-container .input {
+	width: 70px;
+}
+.product-page .order-container .button {
+	margin-left: 20px;
+}
