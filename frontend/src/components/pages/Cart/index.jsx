@@ -52,60 +52,86 @@ function CartPage() {
 		<div className="cart-page">
 			<Container size="sm">
 				<Title order={1}>Cart</Title>
-				{cartProducts.map((product) => (
+				{cartProducts.length !== 0 ? (
 					<>
+						{cartProducts.map((product) => (
+							<>
+								<Space h="md" />
+								<div className="card" key={product.id}>
+									<div className="image-container">
+										<Image
+											height="220px"
+											width="220px"
+											radius="lg"
+											src={`${config.cmsLocation}${product.attributes.pictures.data[0].attributes.url}`}
+										/>
+									</div>
+									<div className="data-display">
+										<Text size="xl">{product.attributes.title}</Text>
+										<Badge size="lg" variant="dot">
+											{product.attributes.category}
+										</Badge>
+
+										<Space h="lg" />
+
+										<Badge size="xl" color="green" variant="filled">
+											₹{product.attributes.price.toFixed(2)} x{" "}
+											{product.quantity}
+										</Badge>
+
+										<Space h="md" />
+
+										<Badge size="lg" variant="outline">
+											Only {product.attributes.stock} left in stock
+										</Badge>
+
+										<Space h="md" />
+
+										<Button
+											className="btn-view"
+											radius="xl"
+											size="md"
+											onClick={() => {
+												window.location = `/product/${product.id}`;
+											}}
+											leftIcon={<Eye />}
+										>
+											View
+										</Button>
+										<Button
+											radius="xl"
+											size="md"
+											color="red"
+											leftIcon={<Trash />}
+											onClick={() => {
+												console.log(product.id);
+												axios
+													.delete(`${config.apiLocation}/cart`, {
+														data: { id: product.id },
+														headers: { token: localStorage.token },
+													})
+													.then((res) => {
+														console.log(res);
+														window.location = window.location;
+													});
+											}}
+										>
+											Delete
+										</Button>
+									</div>
+								</div>
+							</>
+						))}
+						<Space h="lg" />
+						<Title order={2}>Total = ₹{total.toFixed(2)}</Title>
 						<Space h="md" />
-						<div className="card" key={product.id}>
-							<div className="image-container">
-								<Image
-									height="220px"
-									width="220px"
-									radius="lg"
-									src={`${config.cmsLocation}${product.attributes.pictures.data[0].attributes.url}`}
-								/>
-							</div>
-							<div className="data-display">
-								<Text size="xl">{product.attributes.title}</Text>
-								<Badge size="lg" variant="dot">
-									{product.attributes.category}
-								</Badge>
-
-								<Space h="lg" />
-
-								<Badge size="xl" color="green" variant="filled">
-									₹{product.attributes.price.toFixed(2)} x {product.quantity}
-								</Badge>
-
-								<Space h="md" />
-
-								<Badge size="lg" variant="outline">
-									Only {product.attributes.stock} left in stock
-								</Badge>
-
-								<Space h="md" />
-
-								<Button
-									className="btn-view"
-									radius="xl"
-									size="md"
-									onClick={() => {
-										window.location = `/product/${product.id}`;
-									}}
-                                    leftIcon={<Eye/>}
-								>
-									View
-								</Button>
-								<Button radius="xl" size="md" color="red" leftIcon={<Trash />}>
-									Delete
-								</Button>
-							</div>
-						</div>
+						<Button fullWidth>Order</Button>
+						<Space h="xl" />
+						<Space h="xl" />
 					</>
-				))}
-				<Space h="lg" />
-				<Title order={2}>Total = ₹{total.toFixed(2)}</Title>
-				<Space h="md" />
-				<Button fullWidth>Order</Button>
+				) : (
+					<Title order={2}>Cart is empty</Title>
+				)}
 			</Container>
 		</div>
 	);
