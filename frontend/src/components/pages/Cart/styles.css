@@ -1,0 +1,14 @@
+.cart-page .card {
+	display: flex;
+	border: 2px solid darkslategray;
+	padding: 10px;
+	border-radius: 20px;
+}
+.cart-page .card .data-display {
+	width: 100%;
+	padding-left: 30px;
+}
+.cart-page .card .btn-view {
+	display: inline-block;
+	margin-right: 20px;
+}
