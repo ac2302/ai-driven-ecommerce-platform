@@ -1,0 +1,34 @@
+.explore {
+	display: flex;
+}
+
+.explore .sidebar {
+	/* background-color: brown; */
+	width: 600px;
+	/* border-right: 2px solid darkslategrey; */
+	padding: 20px;
+}
+
+.explore .main {
+	/* background-color: aqua; */
+	width: 100%;
+}
+
+.explore .card {
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid darkslategray;
+	border-radius: 20px;
+	display: flex;
+}
+
+.explore .card .data-display {
+	padding-left: 20px;
+	width: 100%;
+}
+
+.explore .card .btn {
+	display: block;
+	margin-top: auto;
+	margin-left: auto;
+}

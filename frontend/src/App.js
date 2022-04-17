@@ -2,6 +2,7 @@ import { MantineProvider, ScrollArea } from "@mantine/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { MyNavbar } from "./components/Navbar";
+import Explore from "./components/pages/Explore";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import VerifyPage from "./components/pages/Verify";
@@ -20,6 +21,7 @@ function App() {
 							<Route path="/register" element={<Register />} />
 							<Route path="/verify" element={<VerifyPage />} />
 							<Route path="/login" element={<Login />} />
+							<Route path="/explore" element={<Explore />} />
 							<Route path="*" element={<h1>404</h1>} />
 						</Routes>
 					</ScrollArea>
