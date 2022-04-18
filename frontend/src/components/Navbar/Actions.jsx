@@ -1,7 +1,13 @@
 import { Button } from "@mantine/core";
 
 import React from "react";
-import { Forms, Login, Logout, ShoppingCart } from "tabler-icons-react";
+import {
+	Forms,
+	Login,
+	Logout,
+	ShoppingCart,
+	AddressBook,
+} from "tabler-icons-react";
 export function Actions() {
 	return (
 		<>
@@ -33,6 +39,14 @@ export function Actions() {
 						}}
 					>
 						Sign Out
+					</Button>
+					<Button
+						leftIcon={<AddressBook />}
+						onClick={() => {
+							window.location = "/address";
+						}}
+					>
+						Address
 					</Button>
 					<Button
 						leftIcon={<ShoppingCart />}

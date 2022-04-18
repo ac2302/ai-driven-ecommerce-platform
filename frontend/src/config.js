@@ -1,5 +1,5 @@
 const config = {
-	apiLocation: "http://192.168.0.103:5050",
+	apiLocation: "http://127.0.0.1:5050",
 	cmsLocation: "http://127.0.0.1:1337",
 
 	categories: [

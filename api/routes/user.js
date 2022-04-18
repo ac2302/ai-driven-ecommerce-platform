@@ -9,6 +9,22 @@ router.get("/self", authOnlyMiddleware([]), async (req, res) => {
 	res.send(req.auth.user);
 });
 
+// set address
+router.post("/self/address", authOnlyMiddleware([]), async (req, res) => {
+	const address = req.body.address;
+	const pincode = req.body.pincode;
+
+	if (!(address && pincode))
+		return res.status(400).json({ msg: "missing address or pincode" });
+
+	try {
+		req.auth.user.defaultAddress = { address, pincode };
+		return res.json(await req.auth.user.save());
+	} catch (e) {
+		return res.status(500).json({ err: e });
+	}
+});
+
 // get user by id
 router.get("/:id", async (req, res) => {
 	const user = await User.findById(req.params.id);
