@@ -7,6 +7,7 @@ import {
 	Logout,
 	ShoppingCart,
 	AddressBook,
+	Box,
 } from "tabler-icons-react";
 export function Actions() {
 	return (
@@ -31,22 +32,20 @@ export function Actions() {
 			) : (
 				<>
 					<Button
-						leftIcon={<Logout />}
-						color="red"
-						onClick={() => {
-							localStorage.removeItem("token");
-							window.location = "/";
-						}}
-					>
-						Sign Out
-					</Button>
-					<Button
 						leftIcon={<AddressBook />}
 						onClick={() => {
 							window.location = "/address";
 						}}
 					>
 						Address
+					</Button>
+					<Button
+						leftIcon={<Box />}
+						onClick={() => {
+							window.location = "/orders";
+						}}
+					>
+						Orders
 					</Button>
 					<Button
 						leftIcon={<ShoppingCart />}
@@ -56,6 +55,16 @@ export function Actions() {
 						}}
 					>
 						Cart
+					</Button>
+					<Button
+						leftIcon={<Logout />}
+						color="red"
+						onClick={() => {
+							localStorage.removeItem("token");
+							window.location = "/";
+						}}
+					>
+						Sign Out
 					</Button>
 				</>
 			)}

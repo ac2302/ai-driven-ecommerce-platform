@@ -1,0 +1,14 @@
+.orders-page .card {
+	display: flex;
+	border: 2px solid darkslategray;
+	padding: 10px;
+	border-radius: 20px;
+}
+.orders-page .card .data-display {
+	width: 100%;
+	padding-left: 30px;
+}
+.orders-page .card .btn-view {
+	display: inline-block;
+	margin-left: 280px;
+}
