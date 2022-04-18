@@ -44,12 +44,76 @@ router.post("/", authOnlyMiddleware([]), async (req, res) => {
 			address: address,
 		});
 	}
-	
+
 	req.auth.user.cart = [];
 
 	req.auth.user.save();
 
 	res.json(req.auth.user.orders);
+});
+
+// get all orders
+router.get("/all", authOnlyMiddleware(["admin"]), async (req, res) => {
+	const users = await User.find({});
+	let orders = [];
+
+	users.forEach((user) => {
+		user.orders.forEach((order) => {
+			orders.push({
+				...{
+					id: order.id,
+					_id: order._id,
+					quantity: order.quantity,
+					address: order.address,
+					delivered: order.delivered,
+				},
+				user: user._id,
+			});
+		});
+	});
+
+	res.send(orders);
+});
+
+// mark order as delivered
+router.post("/deliver", authOnlyMiddleware(["admin"]), async (req, res) => {
+	userId = req.body.user;
+	orderId = req.body._id;
+
+	const user = await User.findById(userId);
+
+	for (var i = 0; i < user.orders.length; i++) {
+		if (user.orders[i]._id == orderId) {
+			user.orders[i].delivered = true;
+		}
+	}
+
+	res.json(await user.save());
+});
+
+// delete order
+router.delete("/", authOnlyMiddleware(["admin"]), async (req, res) => {
+	userId = req.body.user;
+	orderId = req.body._id;
+
+	const user = await User.findById(userId);
+
+	for (var i = 0; i < user.orders.length; i++) {
+		if (user.orders[i]._id == orderId) {
+			console.log("restocking");
+			console.log(
+				(await getProductStock(user.orders[0].id)) + user.orders[0].quantity
+			);
+			await setProductStock(
+				user.orders[0].id,
+				(await getProductStock(user.orders[0].id)) + user.orders[0].quantity
+			);
+		}
+	}
+
+	user.orders = user.orders.filter((order) => order._id != orderId);
+
+	res.json(await user.save());
 });
 
 module.exports = router;

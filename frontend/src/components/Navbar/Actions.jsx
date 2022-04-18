@@ -1,6 +1,7 @@
 import { Button } from "@mantine/core";
+import axios from "axios";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Forms,
 	Login,
@@ -8,8 +9,24 @@ import {
 	ShoppingCart,
 	AddressBook,
 	Box,
+	Key,
 } from "tabler-icons-react";
+import config from "../../config";
 export function Actions() {
+	const [isAdmin, setIsAdmin] = useState(false);
+
+	useEffect(() => {
+		axios
+			.get(`${config.apiLocation}/user/self`, {
+				headers: {
+					token: localStorage.token,
+				},
+			})
+			.then((res) => {
+				setIsAdmin(res.data.role === "admin");
+			});
+	}, []);
+
 	return (
 		<>
 			{localStorage.token == undefined || localStorage.token == "" ? (
@@ -31,6 +48,17 @@ export function Actions() {
 				</>
 			) : (
 				<>
+					{isAdmin ? (
+						<Button
+							color="orange"
+							leftIcon={<Key />}
+							onClick={() => {
+								window.location = "/order-admin";
+							}}
+						>
+							Manage Orders
+						</Button>
+					) : null}
 					<Button
 						leftIcon={<AddressBook />}
 						onClick={() => {

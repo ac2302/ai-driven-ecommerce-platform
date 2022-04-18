@@ -6,6 +6,7 @@ import AddressPage from "./components/pages/Address";
 import CartPage from "./components/pages/Cart";
 import Explore from "./components/pages/Explore";
 import Login from "./components/pages/Login";
+import OrderAdminPage from "./components/pages/OrderAdmin";
 import OrdersPage from "./components/pages/Orders";
 import ProductPage from "./components/pages/Product";
 import Register from "./components/pages/Register";
@@ -30,6 +31,7 @@ function App() {
 							<Route path="/cart" element={<CartPage />} />{" "}
 							<Route path="/orders" element={<OrdersPage />} />
 							<Route path="/address" element={<AddressPage />} />
+							<Route path="/order-admin" element={<OrderAdminPage />} />
 							<Route path="*" element={<h1>404</h1>} />
 						</Routes>
 					</ScrollArea>
