@@ -19,7 +19,7 @@ router.post("/", authOnlyMiddleware([]), async (req, res) => {
 			.status(400)
 			.json({ msg: "no address provided and no default address" });
 
-	if (!(address.name && address.address && address.pincode))
+	if (!(address.address && address.pincode))
 		return res.status(400).json({ msg: "incomplete address" });
 
 	if (req.auth.user.cart.length === 0)
@@ -44,6 +44,8 @@ router.post("/", authOnlyMiddleware([]), async (req, res) => {
 			address: address,
 		});
 	}
+	
+	req.auth.user.cart = [];
 
 	req.auth.user.save();
 

@@ -1,4 +1,5 @@
 import {
+	Alert,
 	Badge,
 	Button,
 	Container,
@@ -9,12 +10,13 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Eye, Trash } from "tabler-icons-react";
+import { AlertTriangle, Eye, Trash } from "tabler-icons-react";
 import config from "../../../config";
 
 import "./styles.css";
 
 function CartPage() {
+	const [alert, setAlert] = useState(false);
 	const [cart, setCart] = useState([]);
 	const [cartProducts, setCartProducts] = useState([]);
 	const [total, setTotal] = useState(0);
@@ -26,6 +28,13 @@ function CartPage() {
 			})
 			.then((res) => {
 				setCart(res.data);
+			});
+		axios
+			.get(`${config.apiLocation}/user/self`, {
+				headers: { token: localStorage.token },
+			})
+			.then((res) => {
+				if (!res.data.defaultAddress) window.location = "/address";
 			});
 	}, []);
 
@@ -52,6 +61,20 @@ function CartPage() {
 		<div className="cart-page">
 			<Container size="sm">
 				<Title order={1}>Cart</Title>
+				{alert ? (
+					<>
+						<Space h="md" />
+						<Alert
+							icon={<AlertTriangle />}
+							color="red"
+							radius="md"
+							withCloseButton
+							variant="filled"
+						>
+							{alert}
+						</Alert>
+					</>
+				) : null}
 				{cartProducts.length !== 0 ? (
 					<>
 						{cartProducts.map((product) => (
@@ -125,7 +148,30 @@ function CartPage() {
 						<Space h="lg" />
 						<Title order={2}>Total = ₹{total.toFixed(2)}</Title>
 						<Space h="md" />
-						<Button fullWidth>Order</Button>
+						<Button
+							fullWidth
+							onClick={() => {
+								axios
+									.post(
+										`${config.apiLocation}/order`,
+										{},
+										{
+											headers: {
+												token: localStorage.token,
+											},
+										}
+									)
+									.then((res) => {
+										console.log(res.data);
+										window.location = "/orders";
+									})
+									.catch((err) => {
+										setAlert(err.response.data.msg);
+									});
+							}}
+						>
+							Order
+						</Button>
 						<Space h="xl" />
 						<Space h="xl" />
 					</>
