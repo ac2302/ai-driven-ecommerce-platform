@@ -3,7 +3,7 @@ const authOnlyMiddleware = require("../middlewares/authOnly");
 const ProductReviewSection = require("../models/ProductReviewSection");
 
 // get reviews
-router.get("/:product", authOnlyMiddleware([]), async (req, res) => {
+router.get("/:product", async (req, res) => {
 	const found = await ProductReviewSection.findOne({
 		product: req.params.product,
 	});
