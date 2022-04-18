@@ -1,24 +1,28 @@
 import {
 	Badge,
+	Blockquote,
 	Button,
 	Container,
 	Image,
 	NumberInput,
 	Paper,
 	Space,
+	Textarea,
 	Title,
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Link } from "tabler-icons-react";
+import { Link, Send } from "tabler-icons-react";
 import config from "../../../config";
 
 import "./styles.css";
 
 function ProductPage() {
 	const [product, setProduct] = useState(false);
+	const [user, setUser] = useState(false);
+	const [reviews, setReviews] = useState([]);
 	const clipboard = useClipboard({ timeout: 1000 });
 
 	useEffect(() => {
@@ -31,6 +35,24 @@ function ProductPage() {
 			.then((res) => {
 				setProduct(res.data.data.attributes);
 				console.log(res.data.data.attributes);
+			});
+		axios
+			.get(`${config.apiLocation}/user/self`, {
+				headers: {
+					token: localStorage.token,
+				},
+			})
+			.then((res) => {
+				setUser(res.data);
+			});
+		axios
+			.get(
+				`${config.apiLocation}/review/${
+					window.location.pathname.split("/").slice(-1)[0]
+				}`
+			)
+			.then((res) => {
+				setReviews(res.data.reviews);
 			});
 	}, []);
 
@@ -104,7 +126,7 @@ function ProductPage() {
 											)
 											.then((res) => {
 												console.log(res);
-                                                alert('item added to cart succesfully')
+												alert("item added to cart succesfully");
 											});
 									}}
 								>
@@ -118,6 +140,61 @@ function ProductPage() {
 								<ReactMarkdown children={product.description} />
 							</Paper>
 						) : null}
+
+						{user ? (
+							<>
+								<Space h="xl" />
+
+								<Textarea
+									autosize
+									id="review-input"
+									label="Your Review"
+									placeholder={`this will be publicly visible under ${user.username}`}
+									radius="md"
+									size="md"
+								/>
+								<Space h="md" />
+								<Button
+									fullWidth
+									leftIcon={<Send />}
+									onClick={() => {
+										const text = document.getElementById("review-input").value;
+
+										if (!text) return;
+
+										axios
+											.post(
+												`${config.apiLocation}/review/${
+													window.location.pathname.split("/").slice(-1)[0]
+												}`,
+												{ text: text, username: user.username },
+												{
+													headers: {
+														token: localStorage.token,
+													},
+												}
+											)
+											.then((res) => {
+												console.log(res.data);
+												setReviews(res.data.reviews);
+												document.getElementById("review-input").value = "";
+											});
+									}}
+								>
+									Send
+								</Button>
+							</>
+						) : null}
+
+						<Space h="xl" />
+						<Title order={3}>Reviews</Title>
+						{reviews.map((review) => (
+							<>
+								<Blockquote cite={`- ${review.username}`}>
+									{review.text}
+								</Blockquote>
+							</>
+						))}
 					</div>
 				</div>
 			) : null}
