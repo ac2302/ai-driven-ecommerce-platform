@@ -4,6 +4,7 @@ const authOnlyMiddleware = require("../middlewares/authOnly");
 const filterData = require("../utils/filterData");
 const config = require("../config");
 const { getProductStock, setProductStock } = require("../utils/productStock");
+const sendMail = require("../utils/sendMail");
 
 // get cart
 router.get("/", authOnlyMiddleware([]), async (req, res) => {
@@ -98,12 +99,17 @@ router.delete("/", authOnlyMiddleware(["admin"]), async (req, res) => {
 
 	const user = await User.findById(userId);
 
+	let itemId = 0;
+	let quantity = 0;
+
 	for (var i = 0; i < user.orders.length; i++) {
 		if (user.orders[i]._id == orderId) {
 			console.log("restocking");
 			console.log(
 				(await getProductStock(user.orders[0].id)) + user.orders[0].quantity
 			);
+			itemId = user.orders[i].id;
+			quantity = user.orders[i].quantity;
 			await setProductStock(
 				user.orders[0].id,
 				(await getProductStock(user.orders[0].id)) + user.orders[0].quantity
@@ -112,6 +118,12 @@ router.delete("/", authOnlyMiddleware(["admin"]), async (req, res) => {
 	}
 
 	user.orders = user.orders.filter((order) => order._id != orderId);
+
+	sendMail(
+		user.email,
+		"Order Cancellation",
+		`Hello ${user.username}, your order for ${quantity} of item no. ${itemId} has been cancelled.`
+	);
 
 	res.json(await user.save());
 });
