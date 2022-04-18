@@ -12,7 +12,7 @@ router.get("/", authOnlyMiddleware([]), async (req, res) => {
 
 // order
 router.post("/", authOnlyMiddleware([]), async (req, res) => {
-	const address = req.body.address || req.auth.user.dafaultAddress;
+	const address = req.body.address || req.auth.user.defaultAddress;
 
 	if (!address)
 		return res

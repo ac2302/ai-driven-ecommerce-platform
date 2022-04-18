@@ -83,7 +83,7 @@ const userSchema = mongoose.Schema(
 			default: false,
 		},
 
-		dafaultAddress: {
+		defaultAddress: {
 			type: addressSchema,
 		},
 		wishlist: {
