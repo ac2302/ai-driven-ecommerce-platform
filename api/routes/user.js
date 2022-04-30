@@ -3,6 +3,7 @@ const User = require("../models/User");
 const authOnlyMiddleware = require("../middlewares/authOnly");
 const filterData = require("../utils/filterData");
 const config = require("../config");
+const axios = require("axios");
 
 // get self
 router.get("/self", authOnlyMiddleware([]), async (req, res) => {
@@ -27,9 +28,14 @@ router.post("/self/address", authOnlyMiddleware([]), async (req, res) => {
 
 // get user by id
 router.get("/:id", async (req, res) => {
-	const user = await User.findById(req.params.id);
-	if (!user) return res.status(404).json({ msg: "user not found" });
-	res.json(user);
+	try {
+		const user = await User.findById(req.params.id);
+		if (!user) return res.status(404).json({ msg: "user not found" });
+		res.json(user);
+	} catch (err) {
+		return res.status(500).json({ msg: "something went wrong" });
+		console.error(err);
+	}
 });
 
 // get user by username

@@ -4,6 +4,7 @@ module.exports = {
 	server: {
 		port: process.env.PORT || 5000,
 	},
+	aiApi: process.env.AI_API,
 	db: {
 		string: process.env.DB_STRING,
 		cleanInterval: 1000 * 60 * 5, // 5 min

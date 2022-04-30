@@ -28,6 +28,7 @@ app.use("/wishlist/", require("./routes/wishlist"));
 app.use("/cart/", require("./routes/cart"));
 app.use("/order/", require("./routes/order"));
 app.use("/review/", require("./routes/review"));
+app.use("/reccomendations/", require("./routes/reccomendations"));
 
 app.listen(config.server.port, "0.0.0.0", () => {
 	console.log(`server live on port ${config.server.port}`);
