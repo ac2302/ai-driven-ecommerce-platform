@@ -1,6 +1,7 @@
 const config = {
 	apiLocation: "http://127.0.0.1:5050",
 	cmsLocation: "http://127.0.0.1:1337",
+	aiApiLocation: "http://127.0.0.1:5000",
 
 	categories: [
 		"phone",
@@ -16,7 +17,10 @@ const config = {
 		"misc",
 	],
 
-	navLinks: [{ link: "/explore", label: "Explore" }],
+	navLinks: [
+		{ link: "/explore", label: "Explore" },
+		{ link: "/chatbot", label: "Chatbot" },
+	],
 };
 
 export default config;

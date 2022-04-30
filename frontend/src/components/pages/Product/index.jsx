@@ -178,6 +178,9 @@ function ProductPage() {
 												console.log(res.data);
 												setReviews(res.data.reviews);
 												document.getElementById("review-input").value = "";
+											})
+											.catch((err) => {
+												if (err.response) alert(err.response.data.msg);
 											});
 									}}
 								>

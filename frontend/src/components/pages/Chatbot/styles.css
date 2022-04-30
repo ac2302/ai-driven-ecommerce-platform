@@ -1,0 +1,8 @@
+.chatbot-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.chatbot-container .display {
+	min-height: calc( 100vh - 150px )
+}

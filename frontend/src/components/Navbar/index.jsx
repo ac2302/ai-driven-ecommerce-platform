@@ -13,12 +13,12 @@ export function MyNavbar({ links }) {
 			</a>
 
 			<span className="right">
-				<Container>
+				{/* <Container> */}
 					<Group spacing="xl">
 						<Links links={links} />
 						<Actions />
 					</Group>
-				</Container>
+				{/* </Container> */}
 			</span>
 		</Header>
 	);
