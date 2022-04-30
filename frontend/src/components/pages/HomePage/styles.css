@@ -1,0 +1,18 @@
+.home-page .card {
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid darkslategray;
+	border-radius: 20px;
+	display: flex;
+}
+
+.home-page .card .data-display {
+	padding-left: 20px;
+	width: 100%;
+}
+
+.home-page .card .btn {
+	display: block;
+	margin-top: auto;
+	margin-left: auto;
+}

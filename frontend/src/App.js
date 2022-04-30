@@ -6,6 +6,7 @@ import AddressPage from "./components/pages/Address";
 import CartPage from "./components/pages/Cart";
 import Chatbot from "./components/pages/Chatbot";
 import Explore from "./components/pages/Explore";
+import HomePage from "./components/pages/HomePage";
 import Login from "./components/pages/Login";
 import OrderAdminPage from "./components/pages/OrderAdmin";
 import OrdersPage from "./components/pages/Orders";
@@ -23,7 +24,7 @@ function App() {
 
 					<ScrollArea className="main">
 						<Routes>
-							<Route path="/" element={<h1>home</h1>} />
+							<Route path="/" element={<HomePage />} />
 							<Route path="/register" element={<Register />} />
 							<Route path="/verify" element={<VerifyPage />} />
 							<Route path="/login" element={<Login />} />
