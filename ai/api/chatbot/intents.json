@@ -19,6 +19,21 @@
         {"tag": "payments",
          "patterns": ["Do you take credit cards?", "Do you accept Mastercard?", "Are you cash only?", "What are your payment options?", "How can I pay you?" ],
          "responses": ["We accept cash or UPI on delivery"]
+        },
+        {
+        "tag": "Order",
+        "patterns": ["When can i get my order","How to check order details","Orders","I have not got my order"],
+        "responses":["You can see your orders by clicking ORDER button","We will get back to you shortly","Can you be more specific please?"]
+        },
+        {
+        "tag": "Refund",
+        "patterns": ["When can i get my money back?","How much time will it take to refund?"],
+        "responses": ["You will get your money in 2-3 bussiness days","Can you be more specific"]
+        },
+         {
+            "tag": "error",
+            "patterns": ["Is the site down?", "I am facing a error in placing the order.", "I am unable to track my order", "I have an issue in the payment process", "I can't update my address"],
+            "responses": ["Sorry for the inconvenience, we are looking into your issue.😄"]
         }
    ]
 }
