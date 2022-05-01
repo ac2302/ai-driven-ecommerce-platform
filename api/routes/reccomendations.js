@@ -22,7 +22,7 @@ router.get("/", authOnlyMiddleware([]), async (req, res) => {
 	const user = req.auth.user;
 	const orderedItems = user.orders.map((order) => order.id);
 
-	if (orderedItems.length === 0) return res.json({ reccomendations: [] });
+	if (orderedItems.length === 0) return res.send([]);
 
 	const reccomendations = [];
 	rules.forEach((rule) => {
